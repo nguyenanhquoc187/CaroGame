@@ -30,7 +30,7 @@ class Menu:
         )
         self.menu.add.label("Game Caro",
                             font_name=pygame_menu.font.FONT_8BIT,
-                            font_color=(11, 156, 255)
+                            font_color=(253, 0, 143)
                             ).translate(0, 50)
 
         items = [('3 x 3', 3),
@@ -43,8 +43,8 @@ class Menu:
             selection_effect=pygame_menu.widgets.NoneSelection(),
             cursor=pygame_menu.locals.CURSOR_HAND,
             font_color=(254, 0, 143),
-            font_name=pygame_menu.font.FONT_8BIT,
-            font_size=20,
+            font_name=pygame_menu.font.FONT_NEVIS,
+            font_size=27,
             style=pygame_menu.widgets.SELECTOR_STYLE_FANCY,
             style_fancy_bgcolor=pygame_menu.themes.TRANSPARENT_COLOR,
             style_fancy_bordercolor=pygame_menu.themes.TRANSPARENT_COLOR,
@@ -77,7 +77,7 @@ class Menu:
                             ).translate(0, 100)
 
         self.menu.add.button('PLAYER VS COMPUTER (PVC)', action=self.initPVCGame,
-                             font_color=(51, 191, 251),
+                             font_color=(253, 0, 143),
                              font_name=pygame_menu.font.FONT_FIRACODE_BOLD,
                              align=pygame_menu.locals.ALIGN_CENTER,
                              border_width=1,
@@ -119,19 +119,6 @@ class Menu:
                                                  switch_border_width=1,
                                                  cursor=pygame_menu.locals.CURSOR_HAND
                                                  ).translate(-30, 265)
-        # self.menu.add.button('QUIT GAME', action=pygame_menu.events.PYGAME_QUIT,
-        #                      font_color=(255, 255, 255),
-        #                      font_name=pygame_menu.font.FONT_FIRACODE_BOLD,
-        #                      align=pygame_menu.locals.ALIGN_CENTER,
-        #                      # border_width=1,
-        #                      font_size=16,
-        #                      padding=(5, 10),
-        #                      cursor=pygame_menu.locals.CURSOR_HAND,
-        #                      selection_effect=pygame_menu.widgets.NoneSelection(),
-        #                      # border_color=(3, 160, 253),
-        #                      background_color=(191, 46, 82),
-        #                      ).translate(0, 160)
-
     def initPVPGame(self):
         boardSize = self.selector1.get_value()[0][1]
         gameTheme = LightTheme

@@ -62,12 +62,7 @@ class GamePanel:
             self.menu.draw(screen)
 
     def run(self, events, playerId, title):
-        # while True:
-        #     events = pygame.event.get()
-        #     for event in events:
-        #         if event.type == pygame.QUIT:
-        #             exit()
-
+       
         if self.menu.is_enabled():
             self.playerId_label.set_title(title)
             self.menu.draw(self.screen)
