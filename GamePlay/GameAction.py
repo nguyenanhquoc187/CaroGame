@@ -6,7 +6,7 @@ from Machine.AI import *
 from Menu.GamePanel import GamePanel
 
 
-class GameAction:
+class GameAction():
     def __init__(self, screen, theme, menu, boardSize):
         self.screen = screen
         self.theme = theme
@@ -18,7 +18,7 @@ class GameAction:
         self.is_running = True
         self.board.drawBoardGames()
         self.menu = menu
-        self.panel = GamePanel(screen, theme, self.resetGame, self.menu, boardSize)
+        self.panel = GamePanel(screen, theme, self.resetGame, self.undoMove, self.menu, boardSize)
 
     # Thực hiện thao tác đánh cờ
     def move(self, row, col):
@@ -49,8 +49,26 @@ class GameAction:
         self.is_running = True
         self.board = BoardGUI(self.screen, self.theme, self.row, self.col)
         self.board.drawBoardGames()
-        self.panel = GamePanel(self.screen, self.theme, self.resetGame, self.menu, self.row)
+        self.panel = GamePanel(self.screen, self.theme, self.resetGame, self.undoMove, self.menu, self.row)
         self.panel.showWinningTitle(" " * 30)
+
+    def undoMove(self):
+        newListMark = []
+        if len(self.board._listMarked) != 0:
+            self.board._listMarked.pop()
+            self.board._listMarked.pop()
+            newListMark = self.board._listMarked
+        self.resetGame()
+        if len(newListMark) != 0:
+            self.playerTurn = newListMark[-2].playerId
+        else: self.playerTurn = 1
+        self.board._number_of_turn = len(newListMark)
+        self.board._listMarked = newListMark
+        for i in newListMark:
+            row, col = i.getPosition()
+            self.board._squares[row][col] = i.playerId
+            self.board.drawPlayerMark(i.playerId, row,col)
+        
 
     # Chơi với người
     def runGamePVP(self):

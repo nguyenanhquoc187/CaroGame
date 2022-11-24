@@ -7,7 +7,7 @@ from GameSettings.DefaultSettings import *
 
 
 class GamePanel:
-    def __init__(self, screen, theme, resetGameFunc, loop, panelSize):
+    def __init__(self, screen, theme, resetGameFunc, undoGameFunc, loop, panelSize):
         self.screen = screen
         self.theme = theme
         self.loop = loop
@@ -50,8 +50,14 @@ class GamePanel:
         winning_Text = ""
         self.winning_label = self.menu.add.label(winning_Text, font_size=20, background_color=(70, 145, 219),
                                                  font_name=pygame_menu.font.FONT_OPEN_SANS_BOLD).translate(0, 180)
+
+        self.menu.add.button("Undo", action=undoGameFunc, font_size=20, font_color=(70, 145, 219),
+                             background_color=(255, 255, 255), padding=(5, 20), 
+                             cursor=pygame_menu.locals.CURSOR_HAND).translate(0, 170)
+
         self.menu.add.button("Reset game", action=resetGameFunc, font_size=20, font_color=(70, 145, 219),
-                             background_color=(255, 255, 255), padding=(5, 20)).translate(0, 210)
+                             background_color=(255, 255, 255), padding=(5, 20),
+                             cursor=pygame_menu.locals.CURSOR_HAND).translate(0, 210)
 
     def click(self):
         self.loop()

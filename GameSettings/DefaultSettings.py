@@ -1,3 +1,4 @@
+import pygame
 # winning when
 # number_square_to_win = 5
 
@@ -22,6 +23,7 @@ circle_player = player_2
 mode_pvp = 1
 mode_pvc = 2
 
+screen = pygame.display.set_mode((screen_width, screen_height))
 # board color
 # background_color = (28, 170, 156)
 # light background
