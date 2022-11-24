@@ -24,7 +24,7 @@ class GameAction:
     def move(self, row, col):
         boardState = self.board.markSquare(self.playerTurn, row, col)
         if boardState != 0:
-            self.panel.showWinningTitle("Player " + str(self.playerTurn) + " thắng !")
+            self.panel.showWinningTitle("Player " + str(self.playerTurn) + " win!")
             self.panel.menu.draw(self.screen)
             self.is_running = False
         if self.board.isFull() and boardState == 0:
