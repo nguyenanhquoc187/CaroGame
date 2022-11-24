@@ -120,7 +120,7 @@ class AI:
 
     def mediumLevel(self, main_board):
         if self.boardsize == 10 or self.boardsize == 15:
-            return self.mostMove(main_board)
+            return self.mostMoveEnhanced(main_board)
         elif main_board.getNumberOfTurn() < 2:
             move = self.randomLevel(main_board)
         else:
