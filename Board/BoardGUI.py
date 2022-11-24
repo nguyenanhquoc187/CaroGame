@@ -3,6 +3,7 @@ from GameSettings.DefaultSettings import *
 from GameSettings import Caro3x3Size
 from GameSettings import Caro10x10Size
 from GameSettings import Caro15x15Size
+from GameSettings import Caro30x30Size
 # from GameSettings import *
 import pygame
 
@@ -19,8 +20,9 @@ class BoardGUI(AdvancedBoardLogic):
             self.size = Caro3x3Size
         elif row == 10:
             self.size = Caro10x10Size
-        else:
+        elif row == 15:
             self.size = Caro15x15Size
+        else: self.size = Caro30x30Size
         self.number_score_to_win = self.size.number_square_to_win
 
     def drawBoardGames(self):

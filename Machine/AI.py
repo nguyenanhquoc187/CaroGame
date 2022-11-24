@@ -119,7 +119,7 @@ class AI:
         return self.mostMove(main_board)
 
     def mediumLevel(self, main_board):
-        if self.boardsize == 10 or self.boardsize == 15:
+        if self.boardsize == 10 or self.boardsize == 15 or self.boardsize == 30:
             return self.mostMoveEnhanced(main_board)
         elif main_board.getNumberOfTurn() < 2:
             move = self.randomLevel(main_board)
@@ -128,7 +128,7 @@ class AI:
         return move
 
     def hardLevel(self, main_board):
-        if self.boardsize == 10 or self.boardsize == 15:
+        if self.boardsize == 10 or self.boardsize == 15 or self.boardsize == 30:
             return self.mostMoveEnhanced(main_board)
         else : myEval, move = self.minimax_update(main_board, False, -100, 100, 1000)
         return move

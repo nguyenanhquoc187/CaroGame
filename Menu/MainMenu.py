@@ -35,7 +35,8 @@ class Menu:
 
         items = [('3 x 3', 3),
                  ('10 x 10', 10),
-                 ('15 x 15', 15)]
+                 ('15 x 15', 15),
+                 ('30 x 30', 30)]
         self.selector1 = self.menu.add.selector(
             title='',
             items=items,
@@ -101,23 +102,23 @@ class Menu:
         self.menu.add.label("Settings",
                             font_name=pygame_menu.font.FONT_8BIT,
                             font_color=(255, 255, 255),
-                            align=pygame_menu.locals.ALIGN_LEFT,
+                            align=pygame_menu.locals.ALIGN_RIGHT,
                             font_size=16
-                            ).translate(0, 250)
+                            ).translate(-30, 250)
         self.theme = self.menu.add.toggle_switch('Theme', False, width=100,
                                                  font_name=pygame_menu.font.FONT_NEVIS,
                                                  font_color=(255, 255, 255), padding=0,
                                                  selection_effect=pygame_menu.widgets.NoneSelection(),
-                                                 align=pygame_menu.locals.ALIGN_LEFT,
+                                                 align=pygame_menu.locals.ALIGN_RIGHT,
                                                  font_size=16, state_text=('Light', 'Dark'),
                                                  slider_color=(48, 94, 140),
                                                  state_color=((255, 255, 255), (8, 14, 58)),
-                                                 switch_margin=(20, 0),
+                                                 switch_margin=(20,0),
                                                  state_text_font_color=((8, 14, 58), (255, 255, 255)),
                                                  switch_height=1.8,
                                                  switch_border_width=1,
                                                  cursor=pygame_menu.locals.CURSOR_HAND
-                                                 ).translate(30, 265)
+                                                 ).translate(-30, 265)
         # self.menu.add.button('QUIT GAME', action=pygame_menu.events.PYGAME_QUIT,
         #                      font_color=(255, 255, 255),
         #                      font_name=pygame_menu.font.FONT_FIRACODE_BOLD,
