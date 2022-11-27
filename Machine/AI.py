@@ -56,14 +56,14 @@ class AI:
             return minEval, bestMove
 
     def minimax(self, board: AdvancedBoardLogic, isMaximizing, depth):
-        if board.isFull() or depth == 0:
-            return 0, None
-
+       
         if board.getWinningState() == self.userPlayer:
             return 1, None
 
         if board.getWinningState() == self.aiPlayer:
             return -1, None
+        if board.isFull() or depth == 0:
+                    return 0, None
 
         if isMaximizing:
             maxEval = -100
@@ -124,11 +124,11 @@ class AI:
         elif main_board.getNumberOfTurn() < 2:
             move = self.randomLevel(main_board)
         else:
-            myEval, move = self.minimax(main_board, False, 1000)
+            myEval, move = self.minimax_update(main_board, False, -100, 100, 1000)
         return move
 
     def hardLevel(self, main_board):
         if self.boardsize == 10 or self.boardsize == 15 or self.boardsize == 30:
             return self.mostMoveEnhanced(main_board)
-        else : myEval, move = self.minimax_update(main_board, False, -100, 100, 1000)
+        else : myEval, move = self.minimax(main_board, False, 100)
         return move

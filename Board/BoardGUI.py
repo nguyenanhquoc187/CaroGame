@@ -41,6 +41,8 @@ class BoardGUI(AdvancedBoardLogic):
     # Override BasicBoardLogic function
     def markSquare(self, playerId, row, col):
         super().markSquare(playerId, row, col)
+        if len(self._listMarked) > 1: self.revomePlayerHighlight()
+        self.drawPlayerHighlight(playerId, row, col)
         self.drawPlayerMark(playerId, row, col)
         boardState = self.getWinningState()
         if boardState != 0:
@@ -64,6 +66,26 @@ class BoardGUI(AdvancedBoardLogic):
         elif playerId == circle_player:
             center = (col * self.square_size + self.square_size // 2, row * self.square_size + self.square_size // 2)
             pygame.draw.circle(self.screen, self.theme.circle_color, center, self.size.circle_radius, self.size.circle_width)
+
+    def drawPlayerHighlight(self, playerId, row, col):
+        point_rect_start = (col * self.square_size ,  row * self.square_size )
+        pygame.draw.rect(self.screen, self.theme.highlight_color, point_rect_start + (self.square_size  , self.square_size ))
+    def revomePlayerHighlight(self):
+        
+        point = self._listMarked[-2].getPosition()
+        point_rect_start = (point[1] * self.square_size , point[0] * self.square_size )
+        pygame.draw.rect(self.screen, self.theme.background_color, point_rect_start + (self.square_size  , self.square_size ))
+        x_index = self.square_size
+        for col in range(self.board_col-1):
+            pygame.draw.line(self.screen, self.theme.line_color, (x_index, 0), (x_index, board_height), self.size.line_width)
+            x_index += self.square_size
+        # Draw horizontal lines
+        y_index = self.square_size
+        for row in range(self.board_col):
+            pygame.draw.line(self.screen, self.theme.line_color, (0, y_index), (board_width, y_index), self.size.line_width)
+            y_index += self.square_size
+
+        self.drawPlayerMark(self._listMarked[-2].playerId, point[0],point[1])
 
     def drawWinningLine(self, playerId, startPoint, endPoint):
         # Get line color for player 1 or player 2

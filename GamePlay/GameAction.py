@@ -68,8 +68,9 @@ class GameAction():
             row, col = i.getPosition()
             self.board._squares[row][col] = i.playerId
             self.board.drawPlayerMark(i.playerId, row,col)
-        
-
+        if len(self.board._listMarked) > 0:
+            self.board.drawPlayerHighlight(self.board._listMarked[-1].playerId, self.board._listMarked[-1].position[0], self.board._listMarked[-1].position[1] )
+            self.board.drawPlayerMark(self.board._listMarked[-1].playerId, self.board._listMarked[-1].position[0], self.board._listMarked[-1].position[1] )
     # Chơi với người
     def runGamePVP(self):
         while True:
