@@ -13,58 +13,16 @@ class AI:
         self.boardsize = boardSize
         self.minDepth = 0
 
-    def minimax_update(self, board, isMaximizing, alpha, beta, depth):
-        if board.isFull() or depth == 0:
-            return 0, None
-
-        if board.getWinningState() == self.userPlayer:
-            return 1, None
-
-        if board.getWinningState() == self.aiPlayer:
-            return -1, None
-
-        if isMaximizing:
-            maxEval = -100
-            bestMove = None
-            emptySqrs = board.getEmptySquares()
-            for (row, col) in emptySqrs:
-                tempBoard = copy.deepcopy(board)
-                tempBoard.markSquare(self.userPlayer, row, col)
-                myEval = self.minimax_update(tempBoard, False, alpha, beta, depth - 1)[0]
-                if myEval > maxEval:
-                    maxEval = myEval
-                    bestMove = (row, col)
-                alpha = max(alpha, myEval)
-                if beta <= alpha:
-                    break
-            return maxEval, bestMove
-
-        if not isMaximizing:
-            minEval = 100
-            bestMove = None
-            emptySqrs = board.getEmptySquares()
-            for (row, col) in emptySqrs:
-                tempBoard = copy.deepcopy(board)
-                tempBoard.markSquare(self.aiPlayer, row, col)
-                myEval = self.minimax_update(tempBoard, True, alpha, beta, depth - 1)[0]
-                if myEval < minEval:
-                    minEval = myEval
-                    bestMove = (row, col)
-                alpha = min(beta, myEval)
-                if beta <= alpha:
-                    break
-            return minEval, bestMove
-
-    def minimax(self, board: AdvancedBoardLogic, isMaximizing, depth):
+    def minimax(self, board: AdvancedBoardLogic, isMaximizing):
        
         if board.getWinningState() == self.userPlayer:
             return 1, None
 
         if board.getWinningState() == self.aiPlayer:
             return -1, None
-        if board.isFull() or depth == 0:
+        if board.isFull():
                     return 0, None
-
+      
         if isMaximizing:
             maxEval = -100
             bestMove = None
@@ -72,7 +30,7 @@ class AI:
             for (row, col) in emptySqrs:
                 tempBoard = copy.deepcopy(board)
                 tempBoard.markSquare(self.userPlayer, row, col)
-                myEval = self.minimax(tempBoard, False, depth - 1)[0]
+                myEval = self.minimax(tempBoard, False)[0]
                 if myEval > maxEval:
                     maxEval = myEval
                     bestMove = (row, col)
@@ -85,7 +43,7 @@ class AI:
             for (row, col) in emptySqrs:
                 tempBoard = copy.deepcopy(board)
                 tempBoard.markSquare(self.aiPlayer, row, col)
-                myEval = self.minimax(tempBoard, True, depth - 1)[0]
+                myEval = self.minimax(tempBoard, True)[0]
                 if myEval < minEval:
                     minEval = myEval
                     bestMove = (row, col)
@@ -124,11 +82,13 @@ class AI:
         elif main_board.getNumberOfTurn() < 2:
             move = self.randomLevel(main_board)
         else:
-            myEval, move = self.minimax_update(main_board, False, -100, 100, 1000)
+            myEval, move = self.minimax(main_board, False)
         return move
 
     def hardLevel(self, main_board):
         if self.boardsize == 10 or self.boardsize == 15 or self.boardsize == 30:
             return self.mostMoveEnhanced(main_board)
-        else : myEval, move = self.minimax(main_board, False, 100)
+        elif main_board.getNumberOfTurn() < 2:
+            move = self.randomLevel(main_board)
+        else : myEval, move = self.minimax(main_board, False)
         return move
